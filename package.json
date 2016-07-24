@@ -1,16 +1,16 @@
 {
   "name": "hands",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simple gamepad API interface for browser",
   "main": "bin/bundle.js",
   "scripts": {
-      "transpile-watch": "babel --presets es2015 --watch src --out-dir build",
-      "bundle-watch": "watchify build/core.js -o hands.js -v",
-      "transpile": "mkdir -p build && babel --presets es2015 src --out-dir build",
-      "bundle": "browserify build/core.js -o hands.js",
-      "serve": "node node_modules/gamebutler examples/index.html",
-      "dev": "npm run transpile && npm run transpile-watch | npm run bundle-watch | npm run serve",
-      "clean": "rm -rf build",
+    "transpile-watch": "babel --presets es2015 --watch src --out-dir build",
+    "bundle-watch": "watchify build/core.js -o hands.js -v",
+    "transpile": "mkdir -p build && babel --presets es2015 src --out-dir build",
+    "bundle": "browserify build/core.js -o hands.js",
+    "serve": "node node_modules/gamebutler examples/index.html",
+    "dev": "npm run transpile && npm run transpile-watch | npm run bundle-watch | npm run serve",
+    "clean": "rm -rf build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
