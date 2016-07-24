@@ -1,6 +1,6 @@
 console.log((()=>{return "yo"})())
 
-class Hands {
+export class Hands {
     constructor(...args) {
 	this.hands = []
     }
