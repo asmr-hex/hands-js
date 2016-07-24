@@ -5,9 +5,9 @@
   "main": "bin/bundle.js",
   "scripts": {
       "transpile-watch": "babel --presets es2015 --watch src --out-dir build",
-      "bundle-watch": "mkdir -p bin && watchify build/core.js -o bin/bundle.js -v",
+      "bundle-watch": "watchify build/core.js -o hands.js -v",
       "transpile": "mkdir -p build && babel --presets es2015 src --out-dir build",
-      "bundle": "mkdir -p bin && browserify build/core.js -o bin/bundle.js",
+      "bundle": "browserify build/core.js -o hands.js",
       "serve": "node node_modules/gamebutler examples/index.html",
       "dev": "npm run transpile && npm run transpile-watch | npm run bundle-watch | npm run serve",
       "clean": "rm -rf build",
