@@ -4,6 +4,13 @@
   "description": "simple gamepad API interface for browser",
   "main": "bin/bundle.js",
   "scripts": {
+      "transpile-watch": "babel --presets es2015 --watch src --out-dir build",
+      "bundle-watch": "mkdir -p bin && watchify build/core.js -o bin/bundle.js -v",
+      "transpile": "mkdir -p build && babel --presets es2015 src --out-dir build",
+      "bundle": "mkdir -p bin && browserify build/core.js -o bin/bundle.js",
+      "serve": "node node_modules/gamebutler examples/index.html",
+      "dev": "npm run transpile && npm run transpile-watch | npm run bundle-watch | npm run serve",
+      "clean": "rm -rf build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +27,12 @@
   "bugs": {
     "url": "https://github.com/connorwalsh/hands-js/issues"
   },
-  "homepage": "https://github.com/connorwalsh/hands-js#readme"
+  "homepage": "https://github.com/connorwalsh/hands-js#readme",
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "browserify": "^13.0.1",
+    "gamebutler": "^1.0.4",
+    "watchify": "^3.7.0"
+  }
 }
