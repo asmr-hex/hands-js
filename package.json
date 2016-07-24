@@ -1,0 +1,24 @@
+{
+  "name": "hands",
+  "version": "1.0.0",
+  "description": "simple gamepad API interface for browser",
+  "main": "bin/bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/connorwalsh/hands-js.git"
+  },
+  "keywords": [
+    "gamepad",
+    "API",
+    "controller"
+  ],
+  "author": "c",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connorwalsh/hands-js/issues"
+  },
+  "homepage": "https://github.com/connorwalsh/hands-js#readme"
+}
