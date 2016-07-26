@@ -1,8 +1,8 @@
-console.log((()=>{return "yo"})())
 
 export class Hands {
     constructor(...args) {
-	this.hands = []
+	this.hands = ["a", "b"]
+	console.log((()=>{return "yo"})())
     }
     
     // default generator method

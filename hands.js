@@ -28,15 +28,14 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(function () {
-   return "yo";
-}());
-
 var Hands = exports.Hands = function () {
    function Hands() {
       (0, _classCallCheck3.default)(this, Hands);
 
-      this.hands = [];
+      this.hands = ["a", "b"];
+      console.log(function () {
+         return "yo";
+      }());
    }
 
    // default generator method
