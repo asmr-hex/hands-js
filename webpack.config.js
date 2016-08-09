@@ -1,3 +1,4 @@
+var path = require('path');
 
 var baseConfig = {
     module: {
@@ -6,8 +7,17 @@ var baseConfig = {
 		test: /\.js$/,
 		loader: "babel-loader",
 		exclude: /node_modules/
+	    },
+	    {
+		test: /\.modernizrrc$/,
+		loader: "modernizr"
 	    }
 	]
+    },
+    resolve: {
+	alias: {
+	    modernizr$: path.resolve(__dirname, "./.modernizrrc")
+	}
     }
 }
 

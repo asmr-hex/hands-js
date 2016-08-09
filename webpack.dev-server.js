@@ -8,6 +8,12 @@ var port = 8080
 // 'only-dev-server' doesn't reload the browser on errors
 config.entry.push('webpack/hot/only-dev-server')
 
+// enable HotModuleReplacement
+if (typeof config.plugins === "undefined") {
+    config.plugins = []
+}
+config.plugins.push(new webpack.HotModuleReplacementPlugin())
+
 // add host + port to allow for websocket connection
 config.entry.push('webpack-dev-server/client?http://0.0.0.0:' + port)
 
