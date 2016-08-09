@@ -1,4 +1,11 @@
 
+export function test() { 
+    console.log(
+	(()=>{return "this worked!"})()
+    )
+}
+
+
 export class Hands {
     constructor(...args) {
 	this.hands = ["a", "b"]
