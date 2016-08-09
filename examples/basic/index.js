@@ -1,3 +1,12 @@
+import {test, Hands} from '../../src/hands.core.js'
 
-// instantiate hands
-hands = new Hands();
+
+export function Basic() {
+    (()=>{console.log(__dirname + "Testing")})()
+    test()
+
+
+    console.log(new Hands())
+    // instantiate hands
+    let hands = new Hands();
+}
