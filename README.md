@@ -1,11 +1,11 @@
 # Hands
 simple gamepad API for browser.
 
-### Install
+## Install
 ```shell
-$ npm install hands
+$ npm install --save hands
 ```
-### Usage
+## Usage
 
 **importing and instantiation:**
 ```javascript
@@ -46,12 +46,6 @@ $ npm install hands
 	}
 		
 	window.requestAnimationFrame(update);
-```
-
-**operators on buttons/axes:**
-```javascript
-
-	//
 ```
 
 **setting reaction handlers on value updates**
@@ -101,6 +95,74 @@ $ npm install hands
 		// remove entry from map on disconnection
 		A.delete(hand.id)
 	});
+```
+
+## Documentation
+#####Hands Class:
+The `Hands` class is a collection of connected/registered controllers and
+provides high level methods for operating over all controllers.
+```javascript
+	class Hands {
+		// discover and register connected controllers
+		welcome() {...}
+
+		// query registered controllers and update state.
+		update() {...}
+		
+		// register a custom handler for connections.
+		//
+		// the provided handler takes the newly connected Hand
+		// instance as its only argument.
+		onConnect((hand) => {...}) {...}
+
+		// register a custom handler for disconnections.
+		//
+		// this provided handler takes the newly disconnected
+		// Hand instance as its only argument.
+		onDisconnect((hand) => {...}) {...}
+	}
+```
+
+Additionally, it is possible to iterate over an instance of the class to
+access individual controllers.
+```javascript
+	let hands = new Hands()
+	
+	for (let hand of hands) {
+		// hand is an instance of class 'Hand'
+	}
+```
+
+#####Hand Class:
+The `Hand` class is a high level representation of a controller which
+encompasses percept state and provides methods for which to respond to
+these percepts.
+```javascript
+	class Hand {
+		// given a gamepad, update internal percept state
+		update(gamepad) {...}
+		
+		// set a reaction handler for a particular percept.
+		//
+		// this method takes the input name, a handler function
+		// which takes the value of the input, and optionally
+		// a condition evaluator function which takes this hand
+		// instance and returns a boolean. 
+		setReaction("input-name", v => {...}, [this => {...}])
+		
+		// clear all reactions from a particular percept.
+		clearReactions("input-name")
+		
+		// rename an input.
+		//
+		// this method renames an input which can be used
+		// programmatically. Input values can be accessed
+		// by their names directly from the hand instance.
+		// For example, given a percept named "talk",
+		// developers can access the values of "talk" from
+		// a hand instance with hand.talk.
+		renamePercept("oldInputName", "newInputName")
+	}
 ```
 
 ### Notes
