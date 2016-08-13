@@ -7,7 +7,7 @@
     "dev": "node webpack.dev-server.js",
     "build": "webpack --config=webpack.config.js",
     "clean": "rm hands.js && rm examples/bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register ./test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,8 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
     "webpack-dev-server": "^1.14.1"
   }
 }
