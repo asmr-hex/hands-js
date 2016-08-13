@@ -32,4 +32,31 @@ export class Hand {
 
 	console.log(gamepad)
     }
+
+    update(gamepad) {
+	// update all button states
+	for (let [index, value] in gamepad.buttons) {
+	    let index = Number.parseInt(index)+1
+	    this.buttonMap[index].pressed = gamepad.buttons[index-1].pressed
+	}
+	// update all axis states
+	for (let [index, value] in gamepad.axes) {
+	    let index = Number.parseInt(index)+1
+	    this.axisMap[index].value = gamepad.axes[index-1]
+	}
+    }
+
+    draw() {
+	let drawnJSON = ""
+
+	for (let idx in this.buttonMap) {
+	    drawnJSON += `${this.buttonMap[idx].name}\t\t:${this.buttonMap[idx].pressed}<br>`
+	}
+	for (let idx in this.axisMap) {
+	    drawnJSON += `${this.axisMap[idx].name}\t\t:${this.axisMap[idx].value}<br>`
+	}
+
+
+	return drawnJSON
+    }
 }

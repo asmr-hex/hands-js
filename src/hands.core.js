@@ -1,5 +1,7 @@
 import Modernizr from 'modernizr'
+import {alphabetize} from './hands.util'
 import {Hand} from './hands.hand'
+
 
 /* Hands is the main class for the gamepad API
  * 
@@ -8,9 +10,17 @@ export class Hands {
     constructor(...args) {
 	// initialize an empty map of connected gamepads
 	this.hands = {}
-	this.count = 0
 
 	this.welcome()
+    }
+
+    draw() {
+	let drawnJSON = "<br>"
+	for (let index in  this.hands) {
+	    drawnJSON += this.hands[index].draw() + "<br>"
+	}
+
+	return drawnJSON
     }
     
     welcome() {
@@ -19,10 +29,15 @@ export class Hands {
 	    return
 	}
 
+	// snapshot gamepad indices currently registered
+	let rmHands = Object.keys(this.hands)
+
 	// create new hands from list of connected gamepads
 	for (let gamepad of gamepads) {
 	    if (gamepad.index in Object.keys(this.hands)) {
-		// if we've already got it, skip creating a new hand
+		// if we've already got it, skip creating a new hand and
+		// remove from potentially disconnectedHands array
+		rmHands.splice(rmHands.indexOf(gamepad.index), 1)
 		continue
 	    }
 
@@ -31,21 +46,20 @@ export class Hands {
 	    // create a new hand
 	    this.hands[hand.id] = hand
 
-	    // increment hand count
-	    this.count++
-
-	    console.log(hand)
+	    // print out connection
+	    let alphabetID = alphabetize(hand.id+1)
+	    console.log(`Connected to Hand ${alphabetID}`)
 	}
 
-	let diff = gamepads.length - this.count
-	if (diff > 0) {
-	    console.log("Controller Connection")
-	} else if (diff < 0) {
-	    for (let i = 0; i < -diff; i++) {
-		console.log("Controller Disconnection")
-		this.count--
-	    }
+	// disconnect remaining hands in rmHands array
+	for (let handIndex in rmHands) {
+	    delete(this.hands[handIndex])
+
+	    // print out disconnection
+	    let alphabetID = alphabetize(handIndex+1)
+	    console.log(`Disconnected from Hand ${alphabetID}`)
 	}
+
     }
 
     update() {
@@ -57,13 +71,8 @@ export class Hands {
 	// iterate over gamepads and update button/axis values
 	for (let gamepad of gamepads) {
 	    if (gamepad.index in Object.keys(this.hands)) {
-		// if we don't have this controller registered, ignore it
-		continue
-	    }
-	    for (let [index, value] in gamepad.buttons) {
-		let index = Number.parseInt(index)+1
-
-		this.hands[gamepad.index].buttonMap[index].pressed = value.pressed
+		// only update buttons if this hand is registered!
+		this.hands[gamepad.index].update(gamepad)
 	    }
 	}
 
