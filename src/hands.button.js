@@ -11,9 +11,12 @@ export class Button {
 	this._valueHistory = new Array(2).fill(0)
     }
 
-    update() {
+    update(v) {
+	// update pressed value
+	this.pressed = v
+
 	// shift value history values
-	this._valueHistory.unshift(this.pressed ? 1 : 0)
+	this._valueHistory.unshift(v ? 1 : 0)
 	this._valueHistory.pop()
     }
 
