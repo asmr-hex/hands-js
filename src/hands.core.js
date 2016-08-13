@@ -9,16 +9,16 @@ import {Hand} from './hands.hand'
 export class Hands {
     constructor(...args) {
 	// initialize an empty map of connected gamepads
-	this.hands = {}
+	this.hands = new Map()
 
 	this.welcome()
     }
 
     draw() {
 	let drawnJSON = "<br>"
-	for (let index in  this.hands) {
-	    drawnJSON += this.hands[index].draw() + "<br>"
-	}
+	this.hands.forEach((v,k,m) => {
+	    drawnJSON += v.draw() + "<br>"	    
+	})
 
 	return drawnJSON
     }
@@ -30,21 +30,21 @@ export class Hands {
 	}
 
 	// snapshot gamepad indices currently registered
-	let rmHands = Object.keys(this.hands)
+	let rmHands = [...this.hands.keys()]
 
 	// create new hands from list of connected gamepads
 	for (let gamepad of gamepads) {
-	    if (gamepad.index in Object.keys(this.hands)) {
+	    if (this.hands.has(gamepad.index)) {
 		// if we've already got it, skip creating a new hand and
 		// remove from potentially disconnectedHands array
-		rmHands.splice(rmHands.indexOf(gamepad.index), 1)
+		rmHands.splice(gamepad.index, 1)
 		continue
 	    }
 
 	    let hand = new Hand(gamepad)
 
 	    // create a new hand
-	    this.hands[hand.id] = hand
+	    this.hands.set(hand.id, hand)
 
 	    // print out connection
 	    let alphabetID = alphabetize(hand.id+1)
@@ -53,7 +53,7 @@ export class Hands {
 
 	// disconnect remaining hands in rmHands array
 	for (let handIndex in rmHands) {
-	    delete(this.hands[handIndex])
+	    this.hands.delete(handIndex)
 
 	    // print out disconnection
 	    let alphabetID = alphabetize(handIndex+1)
@@ -70,9 +70,9 @@ export class Hands {
 
 	// iterate over gamepads and update button/axis values
 	for (let gamepad of gamepads) {
-	    if (gamepad.index in Object.keys(this.hands)) {
+	    if (this.hands.has(gamepad.index)) {
 		// only update buttons if this hand is registered!
-		this.hands[gamepad.index].update(gamepad)
+		this.hands.get(gamepad.index).update(gamepad)
 	    }
 	}
 
@@ -96,7 +96,7 @@ export class Hands {
 
     // default generator method
     * [Symbol.iterator]() {
-	for (let hand of this.hands) {
+	for (let [_, hand] of this.hands) {
 	    yield hand;
 	}
     }
