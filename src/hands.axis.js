@@ -14,13 +14,16 @@ export class Axis {
 	this._conditionHandlers.set(f, handler)
     }
 
-    update() {
+    update(v) {
+	// update value
+	this.value = v
+
 	// shift value history values
-	this._valueHistory.unshift(this.value ? 1 : 0)
+	this._valueHistory.unshift(v)
 	this._valueHistory.pop()
 
 	// iterate over condition evaluators and handlers
-	for (let [evaluator, handler] of this._conditionHandlers.entries()) {
+	for (let [evaluator, handler] of this._conditionHandlers) {
 	    // if the condition evaluates to true
 	    if (evaluator(this.value)) {
 		// execute handler

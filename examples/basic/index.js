@@ -6,6 +6,25 @@ export function Basic() {
 
     hands.welcome()
 
+    for (let v of hands) {
+	// assign a condition handler
+	v.AxisA.onCondition((v) => {
+	    return v == 1
+	}, (v) => {
+	    document.getElementById("content").style.backgroundColor = '#FD9987'
+	})
+
+	// assign a condition handler
+	v.AxisA.onCondition((v) => {
+	    return v != 1
+	}, (v) => {
+	    document.getElementById("content").style.backgroundColor = 'white'
+	})
+
+
+	console.log(v.AxisA)
+	
+    }
 
     function update() {
 	hands.welcome()

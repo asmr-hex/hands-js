@@ -27,10 +27,10 @@ $ npm install hands
 		hands.update();
 		
 		// print new values
-		hands.forEach(function(hand) {
-			console.log(hand.value("input-name"));
-		});
-	
+		for (let hand of hands) {
+			console.log(hand.value("intput-name");
+		}
+
 		// continue updating
 		window.requestAnimationFrame(update);
 	}
