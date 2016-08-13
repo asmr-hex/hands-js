@@ -1,4 +1,7 @@
 # Hands
+[![Build Status](https://travis-ci.org/connorwalsh/hands-js.svg?branch=master)](https://travis-ci.org/connorwalsh/hands-js)
+
+
 simple gamepad API for browser.
 
 ## Install
