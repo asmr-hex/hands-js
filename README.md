@@ -9,34 +9,49 @@ $ npm install hands
 
 **importing and instantiation:**
 ```javascript
+	// -- ES6 --
+	import {Hands} from 'hands'
+
+	let hands = new Hands()
+
+
+	// -- ES5 -- 
 	var Hands = require("hands");
 
 	// get all connected controllers
 	var hands = new Hands();
 ```
 
-**reading updated values of connected controllers:**
+**basic:**
 ```javascript
+	// For basic usage, first welcome and register all
+	// connected controllers. Then simply update each
+	// controller and read values of buttons and axes.
+
+	// welcome and register initially connected controllers
+	hands.welcome()
 
 	// main animation loop
 	function update() {
-		// welcome new controller connections
-		hands.welcome();
+	
+		// update hands
+		hands.update()
 
-		// update all connected controllers
-		hands.update();
-		
-		// print new values
+		// read values
 		for (let hand of hands) {
-			console.log(hand.value("intput-name");
+			console.log(hand.value("input-name")
 		}
-
-		// continue updating
+		
 		window.requestAnimationFrame(update);
 	}
-
-	// begin updating
+		
 	window.requestAnimationFrame(update);
+```
+
+**operators on buttons/axes:**
+```javascript
+
+	//
 ```
 
 **setting reaction handlers on value updates**
