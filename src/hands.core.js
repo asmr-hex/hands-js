@@ -1,17 +1,42 @@
 import Modernizr from 'modernizr'
 import {alphabetize} from './hands.util'
 import {Hand} from './hands.hand'
+import * as err from './hands.error'
 
 
 /* Hands is the main class for the gamepad API
  * 
  */
 export class Hands {
-    constructor(...args) {
+    constructor(config = {test: false}) {
+	// set configuration parameters
+	this._test = config.test
+
 	// initialize an empty map of connected gamepads
 	this.hands = new Map()
+	this._connectHandler = (v) => {return}
+	this._disconnectHandler = (v) => {return}
 
 	this.welcome()
+    }
+
+    onConnect(f) {
+	// set connect handler
+	this._connectHandler = this._validateCallback(f, 1)
+    }
+
+    onDisconnect(f) {
+	// set disconnect handler
+	this._disconnectHandler = this._validateCallback(f, 1)
+    }
+    
+    _validateCallback(f, argn, ...args) {
+	// ensure that function accepts appropriate # of params
+	if (f.length != argn) {
+	    throw new Error(err.InvalidSignature(f.toString()))
+	}
+
+	return f
     }
 
     draw() {
@@ -82,7 +107,7 @@ export class Hands {
     _readGamepads() {
 	// ensure that we can read gamepads using Modernizr
 	if (!Modernizr.gamepads) {
-	    console.log("oh no, gamepadAPI not supported!")	    
+	    this._test ? null:console.log(err.GamepadNotSupported())
 	    return null
 	}
 

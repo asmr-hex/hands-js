@@ -1,10 +1,16 @@
 import {Button} from './hands.button'
 import {Axis} from './hands.axis'
 
+
 export class Hand {
     constructor(gamepad) {
 	this.id = gamepad.index
 	this.type = gamepad.id
+
+	this.buttons = { fromIndex: new Map(),
+			 fromName: new Map()}
+	this.axes = { fromIndex: new Map(),
+		      fromName: new Map()}
 	this.buttonMap = new Map()
 	this.axisMap = new Map()
 
@@ -17,7 +23,8 @@ export class Hand {
 	    Object.assign(this, {[button.name]: button})
 
 	    // add entry to button map
-	    this.buttonMap.set(index, this[button.name])
+	    this.buttons.fromIndex.set(index, this[button.name])
+	    this.buttons.fromName.set(this[button.name], index)
 	}
 	// iterate over all axes in gamepad
 	for (let [index, value] in gamepad.axes) {
@@ -32,6 +39,15 @@ export class Hand {
 	}
 
 	console.log(gamepad)
+    }
+    
+    renamePercept(oldName, newName) {
+	// 
+
+    }
+
+    _assignPercept(percept) {
+	
     }
 
     update(gamepad) {
