@@ -1,10 +1,15 @@
 import {Hands} from '../../src/hands.core.js'
+import {Button} from '../../src/hands.button'
 
 export function Basic() {
     // instantiate hands
     let hands = new Hands();
 
     hands.welcome()
+
+    let button = new Button(1)
+    console.log(button)
+    console.log(+button)
 
     for (let v of hands) {
 	// assign a condition handler

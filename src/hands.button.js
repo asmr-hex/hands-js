@@ -36,14 +36,8 @@ export class Button {
     }
 
     [Symbol.toPrimitive](hint) {
-	console.log("SYMBOL.TOPRIMITIVE")
-	if (hint === "number") {
-	    console.log("USING AS NUMBER IN ===")
-	}
-
 	switch (hint) {
 	case "number":
-	    console.log("USING AS NUMBER")
 	    return this.pressed ? 0:1
 	    break
 	case "string":
@@ -53,8 +47,7 @@ export class Button {
 	    return this.pressed
 	    break
 	default:
-	    console.log("USING BUTTON AS")
-	    console.log(hint)
+	    return this.pressed ? 0:1
 	}
     }
 }
