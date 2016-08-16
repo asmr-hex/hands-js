@@ -34,4 +34,20 @@ export class Button {
 	// detect hold using value history
 	// button is held when all history are 1s: [1, 1]
     }
+
+    [Symbol.toPrimitive](hint) {
+	switch (hint) {
+	case "number":
+	    return this.pressed ? 0:1
+	    break
+	case "string":
+	    return this.pressed ? 'unpressed':'pressed'
+	    break
+	case "boolean":
+	    return this.pressed
+	    break
+	default:
+	    return this.pressed ? 0:1
+	}
+    }
 }

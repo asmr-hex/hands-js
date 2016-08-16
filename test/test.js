@@ -1,5 +1,7 @@
 import {expect} from 'chai'
+
 import {Hands} from '../src/hands.core'
+import {Button} from '../src/hands.button'
 import * as err from '../src/hands.error'
 
 
@@ -23,3 +25,11 @@ describe("Providing Valid Callback to onConnect", () => {
     })
 })
 
+/*
+describe("Overloading Button object as Number", () => {
+    it("returns binarized value of button.pressed", () => {
+	let button = new Button(1)
+	expect(Number(button)).to.equal(0)
+    })
+})
+*/
