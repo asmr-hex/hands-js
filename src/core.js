@@ -1,17 +1,21 @@
 import Modernizr from 'modernizr'
-import {alphabetize} from './util'
-import {Hand} from './hand'
+import { alphabetize } from './util'
+import { Hand } from './hand'
 import * as err from './error'
 
 
-/* Hands is the main class for the gamepad API
+/**
+ * Hands is a high level collection of gamepads.
  * 
+ * This class exposes methods which operate over
+ * connected gamepads such as connection handlers,
+ * an update handler, and a reader.
  */
 export class Hands {
   constructor(config = { test: false }) {
     // set configuration parameters
     this._test = config.test
-
+    
     // initialize an empty map of connected gamepads
     this.hands = new Map()
     this._connectHandler = (v) => {return}
@@ -40,14 +44,14 @@ export class Hands {
   }
 
   draw() {
-    let drawnJSON = "<br>"
+    let drawnJSON = '<br>'
     this.hands.forEach((v,k,m) => {
-      drawnJSON += v.draw() + "<br>"	    
+      drawnJSON += v.draw() + '<br>'
     })
 
     return drawnJSON
   }
-  
+
   welcome() {
     let gamepads = this._readGamepads()
     if (!gamepads) {
