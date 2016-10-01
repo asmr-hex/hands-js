@@ -1,5 +1,5 @@
-import {Hands} from '../../src/hands.core.js'
-import {Button} from '../../src/hands.button'
+import {Hands} from '../../src/core.js'
+import {Button} from '../../src/button'
 
 export function Basic() {
     // instantiate hands
@@ -31,8 +31,8 @@ export function Basic() {
 	
     }
 
-    function update() {
-	hands.welcome()
+    let update = () => {
+	//hands.welcome()
 
 	hands.update()
 

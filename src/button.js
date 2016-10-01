@@ -1,4 +1,4 @@
-import {alphabetize} from './hands.util'
+import {alphabetize} from './util'
 
 export class Button {
     constructor(index) {

@@ -1,5 +1,5 @@
-import {Button} from './hands.button'
-import {Axis} from './hands.axis'
+import {Button} from './button'
+import {Axis} from './axis'
 
 
 export class Hand {
